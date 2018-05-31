@@ -2,7 +2,7 @@
 d2d 网关部署文档(Linux)
 
 (Ubuntu)
-1、JDK环境(1.8)
+一、JDK环境(1.8)
     
     root@ubuntu:~# java -version
     java version "1.8.0_171"
@@ -27,8 +27,9 @@ d2d 网关部署文档(Linux)
             source ~/.profile(使配置文件生效)
         3、 检查java版本
             java -version 
-
-2、docker安装
+二、数据库
+(a)、测试环境部署
+1、docker安装
 
     查看版本信息
     root@ubuntu:~# lsb_release -a
@@ -58,13 +59,13 @@ d2d 网关部署文档(Linux)
     sudo systemctl daemon-reload
     sudo systemctl restart docker
     
-3、docker compose 安装
+2、docker compose 安装
     
     1、sudo apt-get -y install python-pip
     2、sudo pip install --upgrade pip
     3、sudo pip install docker-compose
         
-4、通过docker-compose安装mysql5.7
+3、通过docker-compose安装mysql5.7
 
     1、mkdir docker-mysql && cd docker-mysql
     2、vim docker-compose.yml
@@ -104,8 +105,9 @@ d2d 网关部署文档(Linux)
        Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
        
        mysql> 
+(b) 生产环境部署建议用RDS mysql5.7
 
-5、目录结构介绍(部署的步骤和以下介绍顺序有关系)
+三、目录结构介绍(部署的步骤和以下介绍顺序有关系)
     
     (1)map_server  #服务发现(为了动态的加入节点)
         ├── local.yaml #配置文件
@@ -162,7 +164,7 @@ d2d 网关部署文档(Linux)
         notary : {
             #如果为true，将从CorDapp加载并安装公证服务
             custom=true
-            #布尔值来确定公证是否是有效的或无效的。
+            #指定验证或者不验证类型的notary
             validating=true
         }
         #开发模式
